@@ -6,10 +6,10 @@ import "swiper/css/navigation";
 import "swiper/css/autoplay";
 
 const texts = [
-  "Twice the size of Palm Jumeirah",
-  "Last chance to invest in Palm Jebel Ali",
-  "Luxury Island Living",
-  "Panoramic View of the Beaches & Sea",
+  "Easy 70/30 Payment Plan",
+  "10% Down Payment",
+  "60% During Construction",
+  "30% On Handover",
 ];
 
 export default function TextCarousel() {

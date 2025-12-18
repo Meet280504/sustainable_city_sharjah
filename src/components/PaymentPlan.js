@@ -2,9 +2,9 @@ import React, { useRef } from 'react';
 import { useEnquiryModal } from "./EnquiryModal";
 
 const carouselItems = [
-    { id: 1, text1: '20%', text2: 'Down Payment' },
+    { id: 1, text1: '10%', text2: 'Down Payment' },
     { id: 2, text1: '60%', text2: 'During Construction' },
-    { id: 3, text1: '20%', text2: 'On Handover' },
+    { id: 3, text1: '30%', text2: 'On Handover' },
     //   { id: 4, text1: '25 Mins', text2: 'Dubai Downtown' },
     //   { id: 5, text1: '25 Mins', text2: 'Palm Jumeirah' },
     //   { id: 6, text1: '25 Mins', text2: 'Dubai Marina' },
@@ -68,7 +68,7 @@ const PaymentPlan = () => {
             {/* Carousel Container */}
             <div className="relative z-10 w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 <h2 className="text-2xl text-[#997736] sm:text-3xl font-light text-center mb-12 uppercase tracking-wide">
-                    Palm Jebel ALi Payment Plan
+                    Address Grand Downtown Payment Plan
                 </h2>
                 <div className="relative flex items-center justify-center">
                     {/* Previous Button */}

@@ -41,26 +41,52 @@ const EnquiryModal = ({ onClose }) => {
   } = useLeadForm();
 
   const [consentChecked, setConsentChecked] = useState(true);
-  const [phoneError, setPhoneError] = useState("");
+  const [errors, setErrors] = useState({ name: "", phone: "", consent: "" });
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    // ✅ Phone Validation
-    if (!phone || phone.replace(/\D/g, "").length < 10) {
-      setPhoneError("Please enter a valid 10-digit phone number");
+    const name = e.target.name.value.trim();
+    const email = e.target.email.value.trim();
+    const cleanedPhone = phone ? phone.replace(/\D/g, "") : "";
+
+    const newErrors = { name: "", phone: "", consent: "" };
+
+    // ✅ Name validation
+    if (!name) {
+      newErrors.name = "Name is required";
+    }
+
+  // ✅ Phone validation (strong)
+  if (!cleanedPhone) {
+    newErrors.phone = "Phone number is required";
+  } 
+  // Allow country code but ensure at least 8 digits total (including code)
+  else if (cleanedPhone.length < 8) {
+    newErrors.phone = "Please enter a valid phone number";
+  }
+
+    // ✅ Consent validation
+    if (!consentChecked) {
+      newErrors.consent = "You must agree before submitting";
+    }
+
+    // Stop form if errors exist
+    if (newErrors.name || newErrors.phone || newErrors.consent) {
+      setErrors(newErrors);
       return;
     }
-    setPhoneError("");
 
-    if (!consentChecked) return;
-    const formData = { name: e.target.name.value };
+    // ✅ No errors — clear errors and submit
+    setErrors({ name: "", phone: "", consent: "" });
+    const formData = { name, email };
+
     const result = await submitLead(formData, e.target);
     if (result) {
       e.target.reset();
       setConsentChecked(false);
       onClose();
-      navigate("/thankyou");
+      window.location.href = "/thankyou.html";
     }
   };
 
@@ -89,6 +115,9 @@ const EnquiryModal = ({ onClose }) => {
               className="w-full px-4 py-3 rounded-md bg-transparent border border-gray-600 focus:border-[#997736] outline-none"
               required
             />
+            {errors.name && (
+              <span className="text-red-300 text-sm mt-1">{errors.name}</span>
+            )}
 
             {/* Phone Input */}
             <PhoneInput
@@ -109,6 +138,9 @@ const EnquiryModal = ({ onClose }) => {
               enableSearch={true}
               required
             />
+            {errors.phone && (
+              <span className="text-red-300 text-sm mt-1">{errors.phone}</span>
+            )}
 
             <input
               type="email"
@@ -144,6 +176,9 @@ const EnquiryModal = ({ onClose }) => {
                 to call, SMS, email, or WhatsApp me about its products and
                 offers. This consent overrides any registration for DNC / DNCR.
               </label>
+              {errors.consent && (
+                <span className="text-red-300 text-sm mt-1">{errors.consent}</span>
+              )}
             </div>
 
             {/* Submit Button */}

@@ -25,18 +25,51 @@ const Footer = () => {
   } = useLeadForm();
 
   const [consentChecked, setConsentChecked] = useState(true);
+  const [errors, setErrors] = useState({ name: "", phone: "", consent: "" });
 
   const handleFormSubmit = async (e) => {
     e.preventDefault();
-    if (!consentChecked) return;
-    const formData = {
-      name: e.target.name.value,
-    };
+
+    const name = e.target.name.value.trim();
+    const email = e.target.email.value.trim();
+    const cleanedPhone = phone ? phone.replace(/\D/g, "") : "";
+
+    const newErrors = { name: "", phone: "", consent: "" };
+
+    // ✅ Name validation
+    if (!name) {
+      newErrors.name = "Name is required";
+    }
+
+  // ✅ Phone validation (strong)
+  if (!cleanedPhone) {
+    newErrors.phone = "Phone number is required";
+  } 
+  // Allow country code but ensure at least 8 digits total (including code)
+  else if (cleanedPhone.length < 8) {
+    newErrors.phone = "Please enter a valid phone number";
+  }
+
+    // ✅ Consent validation
+    if (!consentChecked) {
+      newErrors.consent = "You must agree before submitting";
+    }
+
+    // Stop form if errors exist
+    if (newErrors.name || newErrors.phone || newErrors.consent) {
+      setErrors(newErrors);
+      return;
+    }
+
+    // ✅ No errors — clear errors and submit
+    setErrors({ name: "", phone: "", consent: "" });
+    const formData = { name, email, phone: cleanedPhone };
+
     const result = await submitLead(formData, e?.target);
     if (result) {
       e.target.reset();
       setConsentChecked(false);
-      navigate("/thankyou"); 
+      window.location.href = "/thankyou.html";
     }
   };
 
@@ -45,29 +78,33 @@ const Footer = () => {
       <footer id="contact" className="w-full bg-[#997736] p-6 sm:p-8 lg:p-10">
         <div className="container mx-auto">
           {/* Desktop Footer */}
+          {/* ===== Desktop View ===== */}
           <div className="hidden lg:flex flex-col items-center">
-            <h2 className="text-white text-2xl font-bold mb-4">ENQUIRE NOW</h2>
+            <h2 className="text-white text-2xl font-bold mb-6">ENQUIRE NOW</h2>
             <form
               onSubmit={handleFormSubmit}
-              className="flex items-end justify-center space-x-4 w-full max-w-5xl"
+              className="flex items-end justify-center gap-4 w-full max-w-5xl"
             >
-              {/* Name input */}
-              <div className="flex-1 flex flex-col">
-                <label className="text-white mb-1 text-sm font-medium">
+              {/* Name */}
+              <div className="flex-1 flex flex-col relative">
+                <label className="text-white mb-2 text-sm font-medium">
                   Name
                 </label>
                 <input
                   type="text"
                   name="name"
                   placeholder="Enter your name"
-                  className="h-[48px] p-3 rounded-lg bg-white border border-gray-300 focus:border-[#997736] outline-none w-full"
+                  className="h-[52px] px-4 rounded-lg bg-white border border-gray-300 focus:border-[#b38e5d] outline-none w-full"
                   required
                 />
+                {errors.name && (
+                  <span className="absolute bottom-[-18px] text-white text-sm mt-1">{errors.name}</span>
+                )}
               </div>
 
-              {/* Phone input */}
-              <div className="flex-1 flex flex-col">
-                <label className="text-white mb-1 text-sm font-medium">
+              {/* Phone */}
+              <div className="flex-1 flex flex-col relative">
+                <label className="text-white mb-2 text-sm font-medium">
                   Phone Number
                 </label>
                 <PhoneInput
@@ -77,67 +114,72 @@ const Footer = () => {
                     setPhone(value);
                     setDialCode(`${country.dialCode}`);
                     setIsoCode(country.countryCode);
-                    setNumberWithoutCountryCode(value.replace(country.dialCode, ""));
+                    setNumberWithoutCountryCode(
+                      value.replace(country.dialCode, "")
+                    );
                   }}
                   inputProps={{ name: "phone", required: true }}
                   containerClass="w-full"
-                  inputClass="!w-full !h-[48px] !pl-12 !pr-3 !rounded-lg !bg-white !text-black !border !border-gray-300 focus:!border-[#997736] !outline-none placeholder:!text-gray-400"
-                  buttonClass="!h-[48px] !flex !items-center !justify-center !bg-gray-200 !border-none !rounded-l-lg "
+                  inputClass="!w-full !h-[52px] !pl-14 !pr-3 !rounded-lg !bg-white !text-black !border !border-gray-300 focus:!border-[#b38e5d] !outline-none placeholder:!text-gray-400"
+                  buttonClass="!h-[52px] !bg-gray-200 !border-none !rounded-l-lg"
                   dropdownClass="!bg-white !text-black"
                   searchClass="!bg-white !text-black"
-                  enableSearch={true}
+                  enableSearch
                   placeholder="Enter phone number"
-                  required
                 />
+                {errors.phone && (
+                  <span className="absolute bottom-[-18px] text-white text-sm mt-1">{errors.phone}</span>
+                )}
               </div>
 
+              {/* Email */}
               <div className="flex-1 flex flex-col">
-                <label className="text-white mb-1 text-sm font-medium">
+                <label className="text-white mb-2 text-sm font-medium">
                   Email
                 </label>
                 <input
                   type="email"
                   name="email"
                   placeholder="Enter your email"
-                  className="h-[48px] p-3 rounded-lg bg-white border border-gray-300 focus:border-[#997736] outline-none w-full"
-                  // required
+                  className="h-[52px] px-4 rounded-lg bg-white border border-gray-300 focus:border-[#b38e5d] outline-none w-full"
                 />
               </div>
 
               <button
                 type="submit"
-                className="bg-[#b38e5d] text-white px-8 py-3 rounded-lg font-bold hover:bg-[#a07e4d] transition-colors h-fit"
+                className="bg-[#b38e5d] text-white px-10 py-3 rounded-lg font-semibold hover:bg-[#a07e4d] transition-all h-[52px]"
                 disabled={loading}
               >
                 {loading ? "Submitting..." : "Enquire"}
               </button>
             </form>
 
-            <div className="flex items-start space-x-2 text-gray-200 text-sm mt-4 text-center max-w-2xl">
+            {/* Consent Text */}
+            <div className="relative flex items-start space-x-2 text-gray-200 text-sm text-center mt-4 max-w-2xl">
               <input
                 type="checkbox"
                 id="consent"
                 checked={consentChecked}
                 onChange={(e) => setConsentChecked(e.target.checked)}
-                className="mt-1 w-4 h-4 accent-[#997736] cursor-pointer"
-                required
+                className="mt-1 w-4 h-4 accent-[#b38e5d] cursor-pointer"
               />
               <label
                 htmlFor="consent"
-                className="text-xs text-gray-200 leading-relaxed cursor-pointer"
+                className="text-xs leading-relaxed cursor-pointer"
               >
                 I consent to the processing of provided data according to the{" "}
                 <Link
                   to="/privacy-policy"
-                  // onClick={onClose}
                   className="underline hover:text-white"
                 >
                   Privacy Policy | Terms & Conditions
                 </Link>{" "}
-                . I authorize Nova Capital Real Estate and its representatives
-                to call, SMS, email, or WhatsApp me about its products and
-                offers. This consent overrides any registration for DNC / DNCR.
+                . I authorize Nova Capital Real Estate to contact me about its
+                products and offers. This consent overrides DNC/DNCR.
               </label>
+              {errors.consent && (
+                <span className="absolute bottom-[-18px] text-white text-sm mt-1">{errors.consent}</span>
+              )}
             </div>
           </div>
 
@@ -154,6 +196,9 @@ const Footer = () => {
                   className="h-[48px] w-full p-3 rounded-lg bg-white border border-gray-300 focus:border-[#997736] outline-none"
                   required
                 />
+                {errors.name && (
+              <span className="text-white text-sm mt-1">{errors.name}</span>
+            )}
               </div>
 
               <div className="flex flex-col">
@@ -177,10 +222,12 @@ const Footer = () => {
                   searchClass="!bg-white !text-black"
                   enableSearch={true}
                   required
-                  // placeholder="Enter phone number"
-                  // dropdownStyle={{ position: "absolute", zIndex: 9999 }}  // ✅ important
+                // placeholder="Enter phone number"
+                // dropdownStyle={{ position: "absolute", zIndex: 9999 }}  // ✅ important
                 />
-
+                  {errors.phone && (
+              <span className="text-white text-sm mt-1">{errors.phone}</span>
+            )}
               </div>
 
               <div className="flex flex-col">
@@ -190,11 +237,11 @@ const Footer = () => {
                   name="email"
                   placeholder="Enter your email"
                   className="h-[48px] w-full p-3 rounded-lg bg-white border border-gray-300 focus:border-[#997736] outline-none"
-                  // required
+                // required
                 />
               </div>
 
-              <div className=" flex items-start space-x-1 text-gray-200 text-xs text-center max-w-2xl mt-2">
+              <div className="relative flex items-start space-x-1 text-gray-200 text-xs text-center max-w-2xl mt-2">
                 <input
                   type="checkbox"
                   id="consent"
@@ -219,6 +266,9 @@ const Footer = () => {
                   to call, SMS, email, or WhatsApp me about its products and
                   offers. This consent overrides any registration for DNC / DNCR.
                 </label>
+                {errors.consent && (
+                  <span className="absolute bottom-[-18px] text-white text-sm mt-1">{errors.consent}</span>
+                )}
               </div>
 
               <button
@@ -236,22 +286,22 @@ const Footer = () => {
       {/* Fixed Mobile Footer Buttons */}
       <div className="fixed bottom-0 left-0 w-full bg-[#997736] shadow-md lg:hidden z-50">
         <div className="flex justify-around w-full p-2 space-x-2">
-          <button onClick={openModal} className="flex-1 flex flex-col items-center p-2 rounded-lg bg-[#b38e5d] text-white hover:bg-[#a07e4d] transition-colors">
+          {/* <button onClick={openModal} className="flex-1 flex flex-col items-center p-2 rounded-lg bg-[#b38e5d] text-white hover:bg-[#a07e4d] transition-colors">
             <i className="fas fa-phone-alt text-lg transform rotate-90"></i>
             <span className="text-sm mt-1">CALL</span>
-          </button>
+          </button> */}
           <button onClick={openModal} className="flex-1 flex flex-col items-center p-2 rounded-lg bg-[#b38e5d] text-white hover:bg-[#a07e4d] transition-colors">
             <i className="fas fa-envelope text-lg"></i>
             <span className="text-sm mt-1">ENQUIRY</span>
           </button>
-          <button onClick={openModal} className="flex-1 flex flex-col items-center p-2 rounded-lg bg-[#b38e5d] text-white hover:bg-[#a07e4d] transition-colors">
+          {/* <button onClick={openModal} className="flex-1 flex flex-col items-center p-2 rounded-lg bg-[#b38e5d] text-white hover:bg-[#a07e4d] transition-colors">
             <i className="fab fa-whatsapp text-lg"></i>
             <span className="text-sm mt-1">WHATSAPP</span>
-          </button>
+          </button> */}
         </div>
       </div>
 
-      {success && (
+      {/* {success && (
         <div className="alert-modal fixed inset-0 flex items-center justify-center bg-black bg-opacity-50">
           <div className="bg-white p-6 rounded-lg text-center max-w-sm">
             <p className="mb-4">Thank you for your enquiry! We will get back to you shortly.</p>
@@ -263,7 +313,7 @@ const Footer = () => {
             </button>
           </div>
         </div>
-      )}
+      )} */}
     </div>
   );
 };
