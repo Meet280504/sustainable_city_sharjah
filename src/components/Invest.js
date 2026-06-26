@@ -60,8 +60,12 @@ const Invest = () => {
   return (
     <div className="w-full px-4 py-16 grid grid-cols-1 md:grid-cols-2 gap-4 justify-center items-center font-inter text-white overflow-hidden">
       {/* Image Section */}
-      <div className="w-full md:order-1 order-2">
-        <img src="../Assets/location-map.png" alt="Location Map" className="w-full h-auto rounded-lg shadow-xl md:shadow-2xl" />
+      <div className="w-full md:order-1 order-2 h-[300px] md:h-[500px] lg:h-[600px] overflow-hidden rounded-lg">
+        <img
+          src="../Assets/location-map.png"
+          alt="Location Map"
+          className="w-full h-full object-contain"
+        />
       </div>
       <div className="flex flex-col items-center text-start md:order-2 order-1">
         <h2 className="text-2xl sm:text-3xl font-semibold text-[#997736] text-center mb-6 uppercase tracking-wide">

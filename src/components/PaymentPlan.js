@@ -3,8 +3,8 @@ import { useEnquiryModal } from "./EnquiryModal";
 
 const carouselItems = [
     // { id: 1, text1: '10%', text2: 'Down Payment' },
-    { id: 2, text1: '70%', text2: 'During Construction' },
-    { id: 3, text1: '30%', text2: 'On Handover' },
+    { id: 2, text1: '30%', text2: 'During Construction' },
+    { id: 3, text1: '70%', text2: 'On Handover' },
     //   { id: 4, text1: '25 Mins', text2: 'Dubai Downtown' },
     //   { id: 5, text1: '25 Mins', text2: 'Palm Jumeirah' },
     //   { id: 6, text1: '25 Mins', text2: 'Dubai Marina' },
