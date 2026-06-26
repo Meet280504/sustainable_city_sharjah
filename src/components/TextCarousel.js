@@ -6,10 +6,10 @@ import "swiper/css/navigation";
 import "swiper/css/autoplay";
 
 const texts = [
-  "Easy 70/30 Payment Plan",
-  "10% Down Payment",
-  "60% During Construction",
-  "30% On Handover",
+  "Payment plan is 30:70",
+  "High-efficiency homes are designed to optimize energy use",
+  "Clean energy generation using solar panels",
+  // "30% On Handover",
 ];
 
 export default function TextCarousel() {
@@ -55,7 +55,7 @@ export default function TextCarousel() {
         {/* Custom Navigation Buttons */}
         <button
           ref={prevRef}
-          className="custom-prev absolute left-1 sm:left-2 md:left-3 top-1/2 -translate-y-1/2 z-10
+          className="md:hidden custom-prev absolute left-1 sm:left-2 md:left-3 top-1/2 -translate-y-1/2 z-10
                      w-8 h-8 sm:w-10 sm:h-10 md:w-12 md:h-12 rounded-full flex items-center justify-center
                      bg-[#997736] text-white hover:opacity-80 transition"
         >
@@ -64,7 +64,7 @@ export default function TextCarousel() {
 
         <button
           ref={nextRef}
-          className="custom-next absolute right-1 sm:right-2 md:right-3 top-1/2 -translate-y-1/2 z-10
+          className="md:hidden custom-next absolute right-1 sm:right-2 md:right-3 top-1/2 -translate-y-1/2 z-10
                      w-8 h-8 sm:w-10 sm:h-10 md:w-12 md:h-12 rounded-full flex items-center justify-center
                      bg-[#997736] text-white hover:opacity-80 transition"
         >

@@ -1,12 +1,13 @@
 import React, { useState, useEffect, useRef } from 'react';
+import { FaLocationDot } from "react-icons/fa6";
 
 const carouselItems = [
-  { id: 1, text1: '5 Mins', text2: 'Burj Khalifa' },
-  { id: 2, text1: '5 Mins', text2: 'Dubai Mall' },
-  { id: 3, text1: '15 Mins', text2: 'DXB Airport' },
-  { id: 4, text1: '15 Mins', text2: 'Dubai Hills' },
+  { id: 1, text1: '7 Mins', text2: 'Airport Road' },
+  { id: 2, text1: '5 Mins', text2: 'Sheikh Mohammed bin Zayed Road' },
+  { id: 3, text1: '10 Mins', text2: 'Emirates Road' },
+  { id: 4, text1: '10 Mins', text2: 'Sharjah National Park' },
   // { id: 5, text1: '20 Mins', text2: 'Dubai International Airport' },
-  { id: 6, text1: '25 Mins', text2: 'Dubai Marina' },
+  // { id: 6, text1: '25 Mins', text2: 'Dubai Marina' },
 ];
 
 const Invest = () => {
@@ -57,57 +58,28 @@ const Invest = () => {
   const visibleItems = getVisibleItems();
 
   return (
-    <div className="relative w-full py-44 flex flex-col justify-center items-center font-inter text-white overflow-hidden">
-      {/* Background Image */}
-      <div className="absolute inset-0 bg-cover bg-center" style={{ backgroundImage: "url('../Assets/gallery7.webp')" }}>
-        <div className="absolute inset-0 bg-black opacity-50"></div>
+    <div className="w-full px-4 py-16 grid grid-cols-1 md:grid-cols-2 gap-4 justify-center items-center font-inter text-white overflow-hidden">
+      {/* Image Section */}
+      <div className="w-full md:order-1 order-2">
+        <img src="../Assets/location-map.png" alt="Location Map" className="w-full h-auto rounded-lg shadow-xl md:shadow-2xl" />
       </div>
-
-      {/* Carousel Container */}
-      <div className="relative z-10 w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <h2 className="text-2xl sm:text-3xl font-light text-center mb-8 uppercase tracking-wide">
+      <div className="flex flex-col items-center text-start md:order-2 order-1">
+        <h2 className="text-2xl sm:text-3xl font-semibold text-[#997736] text-center mb-6 uppercase tracking-wide">
           LOCATION CONNECTIVITY
         </h2>
-        <div className="relative flex items-center justify-center">
-          {/* Previous Button */}
-          <button
-            onClick={handlePrev}
-            className="absolute left-0 -ml-4 z-20 p-2 rounded-full bg-[#997736] bg-opacity-50 hover:bg-opacity-75 transition-colors duration-300 focus:outline-none"
-          >
-            <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-              <path strokeLinecap="round" strokeLinejoin="round" d="M15 19l-7-7 7-7" />
-            </svg>
-          </button>
-
-          {/* Carousel Items */}
-          <div className="w-full grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
-            {visibleItems.map((item, index) => (
-              <div
-                key={item.id}
-                ref={el => itemsRef.current[index] = el}
-                className="relative p-6 bg-transparent rounded-lg shadow-2xl text-center text-[#997736] transform transition-transform duration-500 ease-in-out"
-              >
-                {/* bg-transparent */}
-                {/* <div className="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 px-4 py-2 bg-black text-xs uppercase font-light tracking-widest rounded-full">
-                  CONNECTIVITY
-                </div> */}
-                <div className="mt-8">
-                  <h3 className="text-4xl sm:text-5xl font-bold mb-2">{item.text1}</h3>
-                  <p className="text-sm uppercase font-light tracking-wider">{item.text2}</p>
-                </div>
+        <div className="w-full space-y-2">
+          {carouselItems.map((item) => (
+            <div
+              key={item.id}
+              className="p-2 border-2 border-[#997736] md:border-0 bg-transparent rounded-lg shadow-md hover:shadow-lg text-[#997736] transform transition-transform duration-500 ease-in-out"
+            >
+              <div className="flex items-center">
+                <FaLocationDot className="text-[#997736] mr-2" />
+                <h3 className="text-xl sm:text-2xl font-bold">{item.text2} - {item.text1}</h3>
+                {/* <p className="text-sm uppercase font-light tracking-wider">{item.text2}</p> */}
               </div>
-            ))}
-          </div>
-
-          {/* Next Button */}
-          <button
-            onClick={handleNext}
-            className="absolute right-0 -mr-4 z-20 p-2 rounded-full bg-[#997736] bg-opacity-50 hover:bg-opacity-75 transition-colors duration-300 focus:outline-none"
-          >
-            <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-              <path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" />
-            </svg>
-          </button>
+            </div>
+          ))}
         </div>
       </div>
     </div>

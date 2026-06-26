@@ -3,6 +3,7 @@ import React from "react";
 // import "./LuxuryPage.css";
 import "../App.css";
 import { useEnquiryModal } from "./EnquiryModal";
+import { FaLocationDot } from "react-icons/fa6";
 
 const LuxuryPage = () => {
   const { openModal } = useEnquiryModal();
@@ -12,16 +13,20 @@ const LuxuryPage = () => {
       <section className="luxury-section">
         <div className="luxury-image">
           <img
-            src="../Assets/banner2.webp"
-            alt="Luxury View"
+            src="../Assets/gallery4.jpg"
+            alt="Luxury View" 
           />
         </div>
         <div className="luxury-text">
           <h2 className="font-semibold">
-            About Address Grand Downtown
+            Sustainable City Sharjah - Phase 2
           </h2>
+          <div className="luxury-location flex items-center">
+            <FaLocationDot className="text-[#997736] mr-2" />
+            <span className="text-[#997736] font-bold text-lg">Al Rahmaniya 1, Sharjah</span>
+          </div>
           <p>
-            Address Grand Downtown offers 80 exclusive residences in Downtown Dubai, with stunning views of the Burj Khalifa and the sea. These luxurious homes feature grand proportions, high ceilings, custom furnishings, and marble flooring. Panoramic windows create a seamless indoor-outdoor experience. Opulent bathrooms with soaking tubs, premium kitchens, and customisable design elements ensure both style and functionality, making this a rare opportunity for sophisticated living in a prime location with high ROI potential.
+            Sharjah Sustainable City II marks the next chapter in the successful partnership between the Sharjah Investment and Development Authority (Shurooq) and See Holding, advancing their vision of exceptional, future-focused communities. Blending innovation with responsibility, Sharjah Sustainable City II meets the highest sustainability standards while elevating everyday living, creating a vibrant community that inspires generations.
           </p>
           <button onClick={openModal} className="mt-4 font-semibold border-2 rounded-md border-[#997736] text-[#997736] hover:text-white px-6 py-2 hover:bg-[#997736] transition">DOWNLOAD BROCHURE</button>
         </div>

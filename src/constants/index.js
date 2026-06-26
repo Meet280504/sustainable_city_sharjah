@@ -1,7 +1,7 @@
-export const PROJECT_NAME = 'Address Grand Downtown Dubai'
+export const PROJECT_NAME = 'SUSTAINABLE CITY SHARJAH'
 
-export const EMAIL_JS_PUBLIC_KEY = "-SU1cSsz3-T2DV9yD"
+export const EMAIL_JS_PUBLIC_KEY = "hNfRE6-HrKnVHAh-3"
 
-export const EMAIL_JS_TEMPLATE_ID = "template_jsl0rss"
+export const EMAIL_JS_TEMPLATE_ID = "template_jsI0rss"
 
-export const  EMAIL_JS_SERVICE_ID = "default_service"
+export const  EMAIL_JS_SERVICE_ID = "service_1sq9clp"

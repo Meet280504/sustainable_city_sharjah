@@ -4,10 +4,10 @@ import { useEnquiryModal } from "./EnquiryModal";
 export default function Banner() {
   const { openModal } = useEnquiryModal();
   const images = [
-    "../Assets/banner1.webp",
-    "../Assets/banner2.webp",
-    "../Assets/banner3.webp",
-    "../Assets/banner4.webp",
+    "../Assets/banner1.png",
+    "../Assets/banner2.png",
+    "../Assets/banner3.png",
+    // "../Assets/banner4.webp",
   ];
 
   const [currentImage, setCurrentImage] = useState(0);
@@ -54,7 +54,7 @@ export default function Banner() {
             drop-shadow-[2px_2px_10px_rgba(0,0,0,0.8)]
           "
         >
-          Introducing <br /> ADDRESS GRAND DOWNTOWN <br />
+          Introducing <br /> SUSTAINABLE CITY SHARJAH <br />
           <span className="text-2xl md:text-3xl lg:text-4xl font-bold tracking-widest
             bg-gradient-to-r from-white/90 via-white/90 to-white/90
             bg-clip-text 
@@ -69,7 +69,7 @@ export default function Banner() {
             text-transparent
             drop-shadow-[2px_2px_10px_rgba(0,0,0,0.8)]
           ">
-            AED 10.86 Mn
+            AED 2.46 Mn
           </span>
         </h1>
       </div>

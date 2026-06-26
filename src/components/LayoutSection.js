@@ -21,11 +21,11 @@ const LayoutSection = () => {
         {/* Left Image */}
         <div className="relative group shadow-md overflow-hidden">
           <img
-            src="./Assets/masterplan.webp"
+            src="./Assets/masterplan.png"
             alt="Master Plan"
             className="w-full h-64 md:h-80 object-cover"
           />
-          <button onClick={openModal} className="absolute inset-0 flex items-center justify-center bg-black/40 opacity-100 text-white font-medium text-sm transition">
+          <button onClick={openModal} className="absolute inset-0 flex items-center justify-center bg-black/70 opacity-100 text-white font-medium text-sm transition">
             REQUEST MASTER PLAN LAYOUT
           </button>
         </div>

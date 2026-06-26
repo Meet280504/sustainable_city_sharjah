@@ -5,9 +5,9 @@ import "../App.css";
 import { useEnquiryModal } from "./EnquiryModal";
 
 const images = [
-  "../Assets/a1.webp", // cricket ground
-  "../Assets/a2.webp", // kids play area
-  // "../Assets/a3.png", // swimming pool
+  "../Assets/gallery5.jpg", // cricket ground
+  "../Assets/gallery7.jpg", // kids play area
+  "../Assets/gallery8.jpg", // swimming pool
 ];
 
 export default function AmenitiesCarousel() {

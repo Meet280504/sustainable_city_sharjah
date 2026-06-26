@@ -5,14 +5,14 @@ import { useEnquiryModal } from "./EnquiryModal";
 import "../App.css";
 
 const images = [
-  "../Assets/gallery1.webp", // cricket ground
-  "../Assets/gallery2.webp", // kids play area
-  "../Assets/gallery3.webp", // swimming pool
-  "../Assets/gallery4.webp", // badminton
-  "../Assets/gallery5.webp", // badminton
-  "../Assets/gallery6.webp", // badminton
-  "../Assets/gallery7.webp", // badminton
-  // "../Assets/gallery8.webp", // badminton
+  "../Assets/gallery1.jpg", // cricket ground
+  "../Assets/gallery2.png", // kids play area
+  "../Assets/gallery3.jpg", // swimming pool
+  "../Assets/gallery4.jpg", // badminton
+  "../Assets/gallery5.jpg", // badminton
+  "../Assets/gallery6.jpg", // badminton
+  "../Assets/gallery7.jpg", // badminton
+  "../Assets/gallery8.jpg", // badminton
 ];
 
 export default function GalleryCarousel() {

@@ -5,7 +5,7 @@ import { getUserIP } from "../utils";
 import { EMAIL_JS_PUBLIC_KEY, EMAIL_JS_SERVICE_ID, EMAIL_JS_TEMPLATE_ID, PROJECT_NAME } from "../constants";
 
 // Initialize EmailJS
-emailjs.init("-SU1cSsz3-T2DV9yD");
+emailjs.init("hNfRE6-HrKnVHAh-3");
 
 export const useLeadForm = (projectName = PROJECT_NAME) => {
   const [phone, setPhone] = useState("");
@@ -13,9 +13,9 @@ export const useLeadForm = (projectName = PROJECT_NAME) => {
   const [isoCode, setIsoCode] = useState("");
   const [loading, setLoading] = useState(false);
   const [success, setSuccess] = useState(false);
-  const [numberWithoutCountryCode,setNumberWithoutCountryCode] = useState('')
+  const [numberWithoutCountryCode, setNumberWithoutCountryCode] = useState('')
 
-    // 🔹 Detect user country from IP and set default iso/dialCode
+  // 🔹 Detect user country from IP and set default iso/dialCode
   useEffect(() => {
     const detectCountry = async () => {
       try {
@@ -39,6 +39,18 @@ export const useLeadForm = (projectName = PROJECT_NAME) => {
     setLoading(true);
     try {
       const userIP = await getUserIP();
+      const blockedNumbers = [
+        "6589255804",
+        "9818899303",
+      ];
+
+      const cleanedNumber = numberWithoutCountryCode.replace(/\D/g, "");
+
+      if (blockedNumbers.includes(cleanedNumber)) {
+        alert("This number is not allowed.");
+        setLoading(false);
+        return false;
+      }
 
       // Tracking params from URL or localStorage
       const trackingParams = [
