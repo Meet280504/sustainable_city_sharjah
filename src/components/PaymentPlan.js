@@ -68,7 +68,7 @@ const PaymentPlan = () => {
             {/* Carousel Container */}
             <div className="relative z-10 w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 <h2 className="text-2xl text-[#997736] sm:text-3xl font-light text-center mb-12 uppercase tracking-wide">
-                    Sustainable City Sharjah Payment Plan 
+                  SUSTAINABLE CITY 2 SHARJAH Payment Plan 
                 </h2>
                 <div className="relative flex items-center justify-center">
                     {/* Previous Button */}

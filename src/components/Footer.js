@@ -41,14 +41,14 @@ const Footer = () => {
       newErrors.name = "Name is required";
     }
 
-  // ✅ Phone validation (strong)
-  if (!cleanedPhone) {
-    newErrors.phone = "Phone number is required";
-  } 
-  // Allow country code but ensure at least 8 digits total (including code)
-  else if (cleanedPhone.length < 8) {
-    newErrors.phone = "Please enter a valid phone number";
-  }
+    // ✅ Phone validation (strong)
+    if (!cleanedPhone) {
+      newErrors.phone = "Phone number is required";
+    }
+    // Allow country code but ensure at least 8 digits total (including code)
+    else if (cleanedPhone.length < 8) {
+      newErrors.phone = "Please enter a valid phone number";
+    }
 
     // ✅ Consent validation
     if (!consentChecked) {
@@ -81,78 +81,89 @@ const Footer = () => {
           {/* ===== Desktop View ===== */}
           <div className="hidden lg:flex flex-col items-center">
             <h2 className="text-white text-2xl font-bold mb-6">ENQUIRE NOW</h2>
-            <form
-              onSubmit={handleFormSubmit}
-              className="flex items-end justify-center gap-4 w-full max-w-5xl"
-            >
-              {/* Name */}
-              <div className="flex-1 flex flex-col relative">
-                <label className="text-white mb-2 text-sm font-medium">
-                  Name
-                </label>
-                <input
-                  type="text"
-                  name="name"
-                  placeholder="Enter your name"
-                  className="h-[52px] px-4 rounded-lg bg-white border border-gray-300 focus:border-[#b38e5d] outline-none w-full"
-                  required
-                />
-                {errors.name && (
-                  <span className="absolute bottom-[-18px] text-white text-sm mt-1">{errors.name}</span>
-                )}
-              </div>
-
-              {/* Phone */}
-              <div className="flex-1 flex flex-col relative">
-                <label className="text-white mb-2 text-sm font-medium">
-                  Phone Number
-                </label>
-                <PhoneInput
-                  country={isoCode || "in"}
-                  value={phone}
-                  onChange={(value, country) => {
-                    setPhone(value);
-                    setDialCode(`${country.dialCode}`);
-                    setIsoCode(country.countryCode);
-                    setNumberWithoutCountryCode(
-                      value.replace(country.dialCode, "")
-                    );
-                  }}
-                  inputProps={{ name: "phone", required: true }}
-                  containerClass="w-full"
-                  inputClass="!w-full !h-[52px] !pl-14 !pr-3 !rounded-lg !bg-white !text-black !border !border-gray-300 focus:!border-[#b38e5d] !outline-none placeholder:!text-gray-400"
-                  buttonClass="!h-[52px] !bg-gray-200 !border-none !rounded-l-lg"
-                  dropdownClass="!bg-white !text-black"
-                  searchClass="!bg-white !text-black"
-                  enableSearch
-                  placeholder="Enter phone number"
-                />
-                {errors.phone && (
-                  <span className="absolute bottom-[-18px] text-white text-sm mt-1">{errors.phone}</span>
-                )}
-              </div>
-
-              {/* Email */}
-              <div className="flex-1 flex flex-col">
-                <label className="text-white mb-2 text-sm font-medium">
-                  Email
-                </label>
-                <input
-                  type="email"
-                  name="email"
-                  placeholder="Enter your email"
-                  className="h-[52px] px-4 rounded-lg bg-white border border-gray-300 focus:border-[#b38e5d] outline-none w-full"
+            <div className="w-full max-w-7xl flex flex-col lg:flex-row items-center lg:items-start justify-between gap-10">
+              {/* Left - Nova Logo */}
+              <div className="flex justify-center lg:justify-start lg:w-[220px] flex-shrink-0">
+                <img
+                  src="../Assets/logo_.webp"
+                  alt="Nova Logo"
+                  className="w-48 lg:w-56 h-auto"
                 />
               </div>
-
-              <button
-                type="submit"
-                className="bg-[#b38e5d] text-white px-10 py-3 rounded-lg font-semibold hover:bg-[#a07e4d] transition-all h-[52px]"
-                disabled={loading}
+              <form
+                onSubmit={handleFormSubmit}
+                className="flex-1 flex items-end justify-center gap-4 w-full"
               >
-                {loading ? "Submitting..." : "Enquire"}
-              </button>
-            </form>
+                {/* Name */}
+                <div className="flex-1 flex flex-col relative">
+                  <label className="text-white mb-2 text-sm font-medium">
+                    Name
+                  </label>
+                  <input
+                    type="text"
+                    name="name"
+                    placeholder="Enter your name"
+                    className="h-[52px] px-4 rounded-lg bg-white border border-gray-300 focus:border-[#b38e5d] outline-none w-full"
+                    required
+                  />
+                  {errors.name && (
+                    <span className="absolute bottom-[-18px] text-white text-sm mt-1">{errors.name}</span>
+                  )}
+                </div>
+
+                {/* Phone */}
+                <div className="flex-1 flex flex-col relative">
+                  <label className="text-white mb-2 text-sm font-medium">
+                    Phone Number
+                  </label>
+                  <PhoneInput
+                    country={isoCode || "in"}
+                    value={phone}
+                    onChange={(value, country) => {
+                      setPhone(value);
+                      setDialCode(`${country.dialCode}`);
+                      setIsoCode(country.countryCode);
+                      setNumberWithoutCountryCode(
+                        value.replace(country.dialCode, "")
+                      );
+                    }}
+                    inputProps={{ name: "phone", required: true }}
+                    containerClass="w-full"
+                    inputClass="!w-full !h-[52px] !pl-14 !pr-3 !rounded-lg !bg-white !text-black !border !border-gray-300 focus:!border-[#b38e5d] !outline-none placeholder:!text-gray-400"
+                    buttonClass="!h-[52px] !bg-gray-200 !border-none !rounded-l-lg"
+                    dropdownClass="!bg-white !text-black"
+                    searchClass="!bg-white !text-black"
+                    enableSearch
+                    placeholder="Enter phone number"
+                  />
+                  {errors.phone && (
+                    <span className="absolute bottom-[-18px] text-white text-sm mt-1">{errors.phone}</span>
+                  )}
+                </div>
+
+                {/* Email */}
+                <div className="flex-1 flex flex-col">
+                  <label className="text-white mb-2 text-sm font-medium">
+                    Email
+                  </label>
+                  <input
+                    type="email"
+                    name="email"
+                    placeholder="Enter your email"
+                    className="h-[52px] px-4 rounded-lg bg-white border border-gray-300 focus:border-[#b38e5d] outline-none w-full"
+                  />
+                </div>
+
+                <button
+                  type="submit"
+                  className="bg-[#b38e5d] text-white px-10 py-3 rounded-lg font-semibold hover:bg-[#a07e4d] transition-all h-[52px]"
+                  disabled={loading}
+                >
+                  {loading ? "Submitting..." : "Enquire"}
+                </button>
+              </form>
+            </div>
+
 
             {/* Consent Text */}
             <div className="relative flex items-start space-x-2 text-gray-200 text-sm text-center mt-4 max-w-2xl">
@@ -184,11 +195,23 @@ const Footer = () => {
           </div>
 
           {/* Mobile/Tablet Footer */}
-          <div className="lg:hidden flex flex-col items-center space-y-4">
-            <h2 className="text-white text-2xl font-bold">ENQUIRE NOW</h2>
-            <form onSubmit={handleFormSubmit} className="w-full space-y-4 pb-20">
+          <div className="lg:hidden flex flex-col items-center">
+            <h2 className="text-white text-2xl font-bold mb-5">
+              ENQUIRE NOW
+            </h2>
+            <img
+              src="../Assets/logo_.webp"
+              alt="Nova Logo"
+              className="w-40 sm:w-48 h-auto mb-6"
+            />
+            <form
+              onSubmit={handleFormSubmit}
+              className="w-full max-w-md space-y-4 pb-20"
+            >
               <div className="flex flex-col">
-                <label className="text-white mb-1 text-sm font-medium">Name</label>
+                <label className="text-white mb-1 text-sm font-medium">
+                  Name
+                </label>
                 <input
                   type="text"
                   name="name"
@@ -197,9 +220,12 @@ const Footer = () => {
                   required
                 />
                 {errors.name && (
-              <span className="text-white text-sm mt-1">{errors.name}</span>
-            )}
+                  <span className="text-white text-sm mt-1">
+                    {errors.name}
+                  </span>
+                )}
               </div>
+
 
               <div className="flex flex-col">
                 <label className="text-white mb-1 text-sm font-medium">Phone Number</label>
@@ -225,9 +251,9 @@ const Footer = () => {
                 // placeholder="Enter phone number"
                 // dropdownStyle={{ position: "absolute", zIndex: 9999 }}  // ✅ important
                 />
-                  {errors.phone && (
-              <span className="text-white text-sm mt-1">{errors.phone}</span>
-            )}
+                {errors.phone && (
+                  <span className="text-white text-sm mt-1">{errors.phone}</span>
+                )}
               </div>
 
               <div className="flex flex-col">
