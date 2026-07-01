@@ -54,7 +54,7 @@ export default function Banner() {
             drop-shadow-[2px_2px_10px_rgba(0,0,0,0.8)]
           "
         >
-          Introducing <br /> SUSTAINABLE CITY 2 SHARJAH <br />
+          Introducing <br /> SHARJAH SUSTAINABLE CITY 2 <br />
           <span className="text-2xl md:text-3xl lg:text-4xl font-bold tracking-widest
             bg-gradient-to-r from-white/90 via-white/90 to-white/90
             bg-clip-text 

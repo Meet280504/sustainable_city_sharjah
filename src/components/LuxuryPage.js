@@ -19,7 +19,7 @@ const LuxuryPage = () => {
         </div>
         <div className="luxury-text">
           <h2 className="font-semibold">
-          SUSTAINABLE CITY 2 SHARJAH - Phase 2
+          SHARJAH SUSTAINABLE CITY 2
           </h2>
           <div className="luxury-location flex items-center">
             <FaLocationDot className="text-[#997736] mr-2" />

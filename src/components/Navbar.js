@@ -72,15 +72,15 @@ export default function Navbar() {
         <div className="container mx-auto flex items-center justify-between md:justify-center lg:justify-center px-4 py-3">
           <div className="space-x-8 flex items-center">
             <a href="#home">
-              {/* <img src="../Assets/project_logo.webp" alt="logo" className="w-16" /> */}
-              {/* <img
-                src="../Assets/project_logo.webp"
+              {/* <img src="../Assets/logo_.webp" alt="logo" className="w-16" /> */}
+              <img
+                src="../Assets/logo_.webp"
                 alt="logo"
                 className={`w-28 transition-all duration-300 ${isScrolled
                     ? 'brightness-0 sepia saturate-100 hue-rotate-[25deg] invert-[20%]'
                     : 'fill-white'
                   }`}
-              /> */}
+              />
             </a>
             {/* Desktop Menu */}{' '}
             <div className="hidden md:flex items-center gap-6 font-medium">
